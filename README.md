@@ -116,7 +116,7 @@ frontend/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/ecommerce-frontend.git
+   git clone https://github.com/LaluPrasad-M/ecommerce-frontend.git
    cd ecommerce-frontend
    ```
 
