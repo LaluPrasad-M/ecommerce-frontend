@@ -270,7 +270,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, variant, onStatusUpdate })
               Subtotal:
             </Typography>
             <Typography variant='body2'>
-              ₹{order.subtotal.toFixed(2)}
+              {formatPrice(order.subtotal)}
             </Typography>
           </Box>
           
@@ -280,7 +280,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, variant, onStatusUpdate })
                 Discount:
               </Typography>
               <Typography variant='body2' color='success.dark'>
-                -₹{order.discount.toFixed(2)}
+                -{formatPrice(order.discount)}
               </Typography>
             </Box>
           )}
@@ -291,7 +291,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, variant, onStatusUpdate })
                 Tax:
               </Typography>
               <Typography variant='body2'>
-                ₹{order.tax.toFixed(2)}
+                {formatPrice(order.tax)}
               </Typography>
             </Box>
           )}
@@ -303,7 +303,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, variant, onStatusUpdate })
               Total:
             </Typography>
             <Typography variant="subtitle1" fontWeight="bold">
-              ₹{order.total.toFixed(2)}
+              {formatPrice(order.total)}
             </Typography>
           </Box>
         </Box>

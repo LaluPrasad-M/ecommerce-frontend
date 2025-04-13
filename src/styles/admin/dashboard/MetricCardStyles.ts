@@ -7,26 +7,39 @@ export const metricCardStyles: {
   paperWithLink: SxProps<Theme>;
 } = {
   paper: {
-    p: 3,
+    p: 2,
     height: '100%',
+    minHeight: 120,
     display: 'flex',
     flexDirection: 'column',
-    flex: 1
+    justifyContent: 'space-between',
+    width: '100%',
+    borderRadius: 2
   },
   link: {
     textDecoration: 'none',
     display: 'flex',
-    flexGrow: 1
+    width: '100%',
+    height: '100%'
   },
   subtitleText: {
-    mt: 1
+    mt: 'auto',
+    pt: 1.5
   },
   paperWithLink: {
-    p: 3,
+    p: 2,
     height: '100%',
+    minHeight: 120,
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
-    cursor: 'pointer'
+    justifyContent: 'space-between',
+    width: '100%',
+    cursor: 'pointer',
+    borderRadius: 2,
+    transition: 'transform 0.2s, box-shadow 0.2s',
+    '&:hover': {
+      transform: 'translateY(-2px)',
+      boxShadow: 2
+    }
   }
 }; 

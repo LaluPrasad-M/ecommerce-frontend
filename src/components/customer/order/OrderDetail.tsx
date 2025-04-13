@@ -113,6 +113,10 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
   const handleConfirmCancel = async () => {
     try {
       setCancelError(null);
+      if (!order?.id) {
+        setCancelError('Order ID is missing');
+        return;
+      }
       const updatedOrder = await dispatch(cancelOrder(order.id)).unwrap();
       setOrder(updatedOrder);
       setCancelDialogOpen(false);
@@ -136,6 +140,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
   ];
   
   const getActiveStep = () => {
+    if (!order?.status) return -1;
     if (order.status === 'Cancelled') return -1;
     return steps.findIndex(step => step.value === order.status);
   };
@@ -178,25 +183,25 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
           <Box sx={styles.headerBox}>
             <Box>
               <Typography variant="h5" component="h1" fontWeight="bold">
-                Order #{order.id.substring(0, 8)}
+                Order #{order?.id ? order.id.substring(0, 8) : 'Unknown'}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Placed on {formatDate(order.createdAt)}
+                Placed on {order?.createdAt ? formatDate(order.createdAt) : 'Unknown date'}
               </Typography>
             </Box>
             <Tooltip 
-              title={getStatusDescription(order.status)} 
+              title={order?.status ? getStatusDescription(order.status) : ''} 
               arrow 
               placement="top"
               TransitionComponent={Zoom}
             >
               <Chip
-                icon={getStatusIcon(order.status)}
-                label={order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                icon={order?.status ? getStatusIcon(order.status) : undefined}
+                label={order?.status ? order.status.charAt(0).toUpperCase() + order.status.slice(1) : 'Unknown'}
                 sx={
                   {
-                    ...styles.orderStatusChip(order.status, theme),
-                    ...getOrderDetailChipStyles(order.status, theme)
+                    ...styles.orderStatusChip(order?.status || 'Order Placed', theme),
+                    ...getOrderDetailChipStyles(order?.status || 'Order Placed', theme)
                   } as SxProps<Theme>
                 }
               />
@@ -212,7 +217,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                       <InfoIcon fontSize="small" color="primary" sx={styles.infoIcon} />
                       <Typography variant="subtitle2" color="text.secondary">Order Date</Typography>
                     </Box>
-                    <Typography variant="body1" fontWeight="medium">{formatDate(order.createdAt)}</Typography>
+                    <Typography variant="body1" fontWeight="medium">{order?.createdAt ? formatDate(order.createdAt) : 'Unknown date'}</Typography>
                   </CardContent>
                 </Card>
               </Box>
@@ -224,7 +229,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                       <Typography variant="subtitle2" color="text.secondary">Total Amount</Typography>
                     </Box>
                     <Typography variant="body1" fontWeight="bold" color="primary.main">
-                      {formatPrice(order.total)}
+                      {order?.total ? formatPrice(order.total) : '-'}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -237,7 +242,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                       <Typography variant="subtitle2" color="text.secondary">Items</Typography>
                     </Box>
                     <Typography variant="body1" fontWeight="medium">
-                      {order.items.length} {order.items.length === 1 ? 'item' : 'items'}
+                      {order?.items?.length ? `${order.items.length} ${order.items.length === 1 ? 'item' : 'items'}` : '0 items'}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -247,7 +252,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
         </Paper>
         
         {/* Order Progress Section */}
-        {order.status !== 'Cancelled' ? (
+        {order?.status !== 'Cancelled' ? (
           <Paper elevation={3} sx={styles.progressPaper}>
             <Box sx={styles.iconWithText}>
               <Typography variant="h6" fontWeight="bold">Order Progress</Typography>
@@ -268,7 +273,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
               ))}
             </Stepper>
             
-            <Collapse in={order.status === 'Delivered'}>
+            <Collapse in={order?.status === 'Delivered'}>
               <Alert 
                 severity="success" 
                 sx={styles.alertMessageCentered}
@@ -277,7 +282,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
               </Alert>
             </Collapse>
             
-            {['Order Placed', 'Packed', 'Shipping'].includes(order.status) && (
+            {order?.status && ['Order Placed', 'Packed', 'Shipping'].includes(order.status) && (
               <Box>
                 <Typography variant="body2" color="text.secondary" sx={styles.statusMessageText}>
                   Need to change your plans? You can cancel your order before delivery.
@@ -324,7 +329,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
             onClick={toggleItemsExpanded}
           >
             <Typography variant="h6" fontWeight="bold">
-              Order Items ({order.items.length})
+              Order Items ({order?.items?.length || 0})
             </Typography>
             <IconButton size="small">
               {itemsExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
@@ -333,7 +338,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
           
           <Collapse in={itemsExpanded} timeout="auto">
             <Box sx={styles.infoSection}>
-              {order.items.length === 0 ? (
+              {!order?.items?.length ? (
                 <Typography color="text.secondary" textAlign="center" py={4}>
                   No items in this order
                 </Typography>
@@ -349,7 +354,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {order.items.map((item) => (
+                      {order?.items?.map((item) => (
                         <TableRow key={item.id} hover>
                           <TableCell>
                             <Box sx={styles.productBox}>
@@ -428,7 +433,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                     Shipping Address
                   </Typography>
                   <Typography variant="body2">
-                    {order.shippingAddress || 'No shipping address provided'}
+                    {order?.shippingAddress || 'No shipping address provided'}
                   </Typography>
                 </CardContent>
               </Card>
@@ -440,20 +445,20 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                   <Box sx={styles.summaryBox}>
                     <Box sx={styles.summaryRow}>
                       <Typography variant="body2">Subtotal:</Typography>
-                      <Typography variant="body2">{formatPrice(order.subtotal)}</Typography>
+                      <Typography variant="body2">{order?.subtotal ? formatPrice(order.subtotal) : '-'}</Typography>
                     </Box>
                     <Box sx={styles.summaryRow}>
                       <Typography variant="body2">GST (18%):</Typography>
-                      <Typography variant="body2">{formatPrice(order.tax)}</Typography>
+                      <Typography variant="body2">{order?.tax ? formatPrice(order.tax) : '-'}</Typography>
                     </Box>
                     
-                    {order.coupon && (
+                    {order?.coupon && (
                       <Box sx={styles.summaryRow}>
                         <Typography variant="body2">
                           Discount {order.coupon.discountPercentage && `(${order.coupon.discountPercentage}% off)`}:
                         </Typography>
                         <Typography variant="body2" color="success.main">
-                          -{formatPrice(order.discount)}
+                          -{order?.discount ? formatPrice(order.discount) : '-'}
                         </Typography>
                       </Box>
                     )}
@@ -463,7 +468,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ order: initialOrder }) => {
                     <Box sx={styles.summaryRow}>
                       <Typography variant="subtitle1" fontWeight="bold">Total:</Typography>
                       <Typography variant="subtitle1" fontWeight="bold" color="primary.main">
-                        {formatPrice(order.total)}
+                        {order?.total ? formatPrice(order.total) : '-'}
                       </Typography>
                     </Box>
                   </Box>

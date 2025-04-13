@@ -23,6 +23,7 @@ const OrderDetailPage: React.FC = () => {
   const { selectedOrder: order, loading, error } = useAppSelector(state => state.orders);
   
   useEffect(() => {
+    // Always fetch the order data when the component mounts or the ID changes
     if (id) {
       dispatch(fetchOrderById(id));
     }
@@ -32,6 +33,12 @@ const OrderDetailPage: React.FC = () => {
       dispatch(clearSelectedOrder());
     };
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (order) {
+      console.log('Order data loaded:', order);
+    }
+  }, [order]);
 
   // Loading state with skeletons for better UX
   if (loading) {
@@ -160,7 +167,13 @@ const OrderDetailPage: React.FC = () => {
           Back to Orders
         </Button>
       </Box>
-      <OrderDetail order={order} />
+      {
+        loading ? (
+          <Skeleton variant="rectangular" height={1000} />
+        ) : (
+          <OrderDetail order={order} />
+        )
+      }
     </Container>
   );
 };

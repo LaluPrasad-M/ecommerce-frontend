@@ -12,14 +12,16 @@ const MetricCard: React.FC<MetricCardProps> = ({
 }) => {
   const content = (
     <Paper sx={linkTo ? metricCardStyles.paperWithLink : metricCardStyles.paper}>
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
-      <Typography variant="h3">
-        {value}
-      </Typography>
+      <Box>
+        <Typography variant="subtitle2" color="text.secondary">
+          {title}
+        </Typography>
+        <Typography variant="h4" sx={{ mt: 0.5, fontWeight: 'medium' }}>
+          {value}
+        </Typography>
+      </Box>
       {subtitle && (
-        <Typography variant="body2" color="text.secondary" sx={metricCardStyles.subtitleText}>
+        <Typography variant="caption" color="text.secondary" sx={metricCardStyles.subtitleText}>
           {subtitle}
         </Typography>
       )}
