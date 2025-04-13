@@ -1,5 +1,6 @@
 import { createTheme, responsiveFontSizes, ThemeOptions } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
+import { DEFAULT_THEME } from '../constants';
 
 // Create theme options for light mode
 const getLightTheme = (): ThemeOptions => ({
@@ -188,8 +189,12 @@ const getDarkTheme = (): ThemeOptions => ({
   },
 });
 
+// Get default theme from environment variable
+export const getDefaultTheme = (): PaletteMode => 
+  (DEFAULT_THEME === 'dark' ? 'dark' : 'light') as PaletteMode;
+
 // Function to create theme based on mode
-export const createAppTheme = (mode: PaletteMode) => {
+export const createAppTheme = (mode: PaletteMode = getDefaultTheme()) => {
   let theme = createTheme(mode === 'dark' ? getDarkTheme() : getLightTheme());
   theme = responsiveFontSizes(theme);
   return theme;

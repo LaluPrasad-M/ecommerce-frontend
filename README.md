@@ -225,8 +225,35 @@ The application uses environment variables for configuration:
 - Set up environment variables in your deployment platform for production
 
 Required environment variables:
-- `REACT_APP_API_URL`: URL of the backend API
-- `REACT_APP_VERSION`: Application version
+
+```
+# API URLs
+REACT_APP_API_URL=http://localhost:3000
+
+# Application Version
+REACT_APP_VERSION=1.0.0
+
+# Authentication
+REACT_APP_AUTH_STORAGE_KEY=ecommerce_auth_token
+REACT_APP_USER_DATA_KEY=ecommerce_user_data
+
+# Features
+REACT_APP_ENABLE_ANALYTICS=true
+REACT_APP_ENABLE_NOTIFICATIONS=true
+
+# Payment Integration
+REACT_APP_PAYMENT_GATEWAY_URL=http://localhost:3000/api/payments
+REACT_APP_PAYMENT_PUBLIC_KEY=test_public_key
+
+# UI Configuration
+REACT_APP_DEFAULT_THEME=light
+REACT_APP_DEFAULT_CURRENCY=₹
+REACT_APP_DEFAULT_LOCALE=en-IN
+
+# Misc
+REACT_APP_SUPPORT_EMAIL=support@ecommerce.com
+REACT_APP_CUSTOMER_SERVICE_PHONE=+91-1234567890
+```
 
 ### Deployment Options
 

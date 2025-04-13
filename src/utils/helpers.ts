@@ -1,6 +1,7 @@
 /**
  * Common utility functions used throughout the application
  */
+import { DEFAULT_LOCALE, DEFAULT_CURRENCY } from '../constants';
 
 /**
  * Format a date string into a readable format
@@ -16,7 +17,7 @@ export const formatDate = (dateString: string): string => {
       return 'Invalid date';
     }
     
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat(DEFAULT_LOCALE || 'en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -33,11 +34,25 @@ export const formatDate = (dateString: string): string => {
  * Format a price number into a currency string
  */
 export const formatPrice = (price: number): string => {
-  // Format as Indian Rupees
-  return new Intl.NumberFormat('en-IN', {
+  // Get currency code based on the currency symbol
+  const getCurrencyCode = (symbol: string) => {
+    switch (symbol) {
+      case '₹': return 'INR';
+      case '$': return 'USD';
+      case '€': return 'EUR';
+      case '£': return 'GBP';
+      default: return 'INR';
+    }
+  };
+
+  const currencySymbol = DEFAULT_CURRENCY || '₹';
+  const currencyCode = getCurrencyCode(currencySymbol);
+  
+  // Format based on currency
+  return new Intl.NumberFormat(DEFAULT_LOCALE || 'en-IN', {
     style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0 // Remove decimal places for INR
+    currency: currencyCode,
+    maximumFractionDigits: currencyCode === 'INR' ? 0 : 2 // Remove decimal places for INR
   }).format(price);
 };
 

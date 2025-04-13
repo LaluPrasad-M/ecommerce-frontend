@@ -1,12 +1,14 @@
 import axios from 'axios';
-import { AUTH_TOKEN_KEY, USER_DATA_KEY } from '../constants';
+import { AUTH_TOKEN_KEY, USER_DATA_KEY, APP_VERSION } from '../constants';
 
 // Create axios instance with default config
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
+    'X-App-Version': APP_VERSION,
   },
+  timeout: 15000, // 15 seconds timeout
 });
 
 // Add a request interceptor to inject auth token
