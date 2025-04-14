@@ -136,6 +136,14 @@ frontend/
 
 4. The application will be available at [http://localhost:3000](http://localhost:3000)
 
+### Live Demo
+
+<div align="center">
+  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 8px; font-weight: bold; margin: 20px 0;">
+    🚀 Launch Live Demo
+  </a>
+</div>
+
 ## Architecture and Design Choices
 
 ### Routing and Authentication
@@ -181,6 +189,16 @@ The application uses Formik with Yup for form validation:
 - **Field Validation**: Form schemas defined with Yup for client-side validation
 - **Form Submission**: Integration with Redux actions for form submission
 - **Error Handling**: Consistent error display across forms
+
+### Live Deployment
+
+The application is currently deployed on Railway:
+
+<div align="center">
+  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 8px; font-weight: bold; margin: 20px 0;">
+    🌐 Visit Deployment
+  </a>
+</div>
 
 ## Development Workflow
 
