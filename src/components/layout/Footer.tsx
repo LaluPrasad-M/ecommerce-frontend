@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Link, Stack, Divider, useTheme, IconButton, SvgIcon } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Box, Container, Typography, Link, Stack, Divider, useTheme, SvgIcon } from '@mui/material';
 import { footerStyles } from '../../styles/layout';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
