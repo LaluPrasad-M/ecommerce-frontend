@@ -139,8 +139,8 @@ frontend/
 ### Live Demo
 
 <p align="center">
-  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/">
-    <img src="https://img.shields.io/badge/🚀_LAUNCH_LIVE_DEMO-4CAF50?style=for-the-badge&logo=railway&logoColor=white" alt="Launch Live Demo" />
+  <a href="https://ecommerce-laluprasad.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀_LAUNCH_LIVE_DEMO-4CAF50?style=for-the-badge&logo=vercel&logoColor=white" alt="Launch Live Demo" />
   </a>
 </p>
 
@@ -192,11 +192,11 @@ The application uses Formik with Yup for form validation:
 
 ### Live Deployment
 
-The application is currently deployed on Railway:
+The application is currently deployed on Vercel:
 
 <p align="center">
-  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/">
-    <img src="https://img.shields.io/badge/🌐_VIEW_LIVE_DEPLOYMENT-007BFF?style=for-the-badge&logo=railway&logoColor=white" alt="View Live Deployment" />
+  <a href="https://ecommerce-laluprasad.vercel.app/">
+    <img src="https://img.shields.io/badge/🌐_VIEW_LIVE_DEPLOYMENT-007BFF?style=for-the-badge&logo=vercel&logoColor=white" alt="View Live Deployment" />
   </a>
 </p>
 
