@@ -138,11 +138,11 @@ frontend/
 
 ### Live Demo
 
-<div align="center">
-  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 8px; font-weight: bold; margin: 20px 0;">
-    🚀 Launch Live Demo
+<p align="center">
+  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/">
+    <img src="https://img.shields.io/badge/🚀_LAUNCH_LIVE_DEMO-4CAF50?style=for-the-badge&logo=railway&logoColor=white" alt="Launch Live Demo" />
   </a>
-</div>
+</p>
 
 ## Architecture and Design Choices
 
@@ -194,11 +194,11 @@ The application uses Formik with Yup for form validation:
 
 The application is currently deployed on Railway:
 
-<div align="center">
-  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 8px; font-weight: bold; margin: 20px 0;">
-    🌐 Visit Deployment
+<p align="center">
+  <a href="https://ecommerce-frontend-production-1d3c.up.railway.app/">
+    <img src="https://img.shields.io/badge/🌐_VIEW_LIVE_DEPLOYMENT-007BFF?style=for-the-badge&logo=railway&logoColor=white" alt="View Live Deployment" />
   </a>
-</div>
+</p>
 
 ## Development Workflow
 
